@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet} from '@angular/router';
+import { HeaderComponent } from "./shared/header/header.component";
 import { FooterComponent } from "./shared/footer/footer.component";
-import { HotelBookingComponent } from "./core/component/hotel-booking/hotel-booking.component";
-import { FlightBookingComponent } from "./core/component/flight-booking/flight-booking.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FooterComponent, HotelBookingComponent, FlightBookingComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
