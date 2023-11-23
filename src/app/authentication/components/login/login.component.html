@@ -1,0 +1,33 @@
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-6 sm:py-12">
+  <div class="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+    <div class="w-full">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="group mt-6">
+        <div class="mb-6">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100">
+          <div *ngIf="loginControls.email.errors?.['required'] && (loginControls.email.touched)" class="alert alert-danger">
+            Email is required.
+          </div>
+          <div *ngIf="loginControls.email.errors?.['email'] && (loginControls.email.touched)" class="alert alert-danger">
+            Please enter a valid mail address.
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100">
+          <div *ngIf="loginControls.password.errors?.['required'] && (loginControls.password.touched)" class="alert alert-danger">
+            Password is required.
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <button type="submit" [disabled]="loginForm.invalid" class="w-full rounded-md bg-indigo-500 px-3 py-4 text-white">Login</button>
+        </div>
+        <p class="text-center text-sm text-gray-500">Don&#x27;t have account yet?
+          <a routerLink="/auth/register" routerLinkActive="" class="font-semibold text-indigo-500 focus:text-indigo-700">Register</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

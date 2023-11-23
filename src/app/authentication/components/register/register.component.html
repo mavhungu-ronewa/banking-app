@@ -1,0 +1,41 @@
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-6 sm:py-12">
+  <div class="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+    <div class="w-full">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="group mt-6">
+        <div class="mb-6">
+          <label for="email" class="mb-2 text-sm text-gray-600">Email</label>
+          <input type="email" name="email" id="email" formControlName="email" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100 focus:border-gray-500 focus:outline-none">
+          <div *ngIf="registerControls.email.errors?.['required'] && (registerControls.email.touched)" class="alert alert-danger">
+            Email is required
+          </div>
+          <div *ngIf="registerControls.email.errors?.['email'] && (registerControls.email.touched)" class="alert alert-danger">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="password" class="mb-2 text-sm text-gray-600">Password</label>
+          <input type="password" name="password" id="password" formControlName="password" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100 focus:border-gray-500 focus:outline-none">
+          <div *ngIf="registerControls.password.errors?.['required'] && (registerControls.password.touched)" class="alert alert-danger">
+            Password is required.
+          </div>
+          <div *ngIf="registerControls.password.errors?.['minlength'] && (registerControls.password.touched)" class="alert alert-danger">
+            Password must be at least 6 characters.
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="username" class="mb-2 text-sm text-gray-600">Username</label>
+          <input type="text" name="username" id="username" formControlName="username" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100 focus:border-gray-500 focus:outline-none">
+          <div *ngIf="registerControls.username.errors?.['required'] && (registerControls.username.touched)" class="alert alert-danger">
+            Username is required.
+          </div>
+        </div>
+        <div class="mb-4">
+          <button type="submit" [disabled]="registerForm.invalid" class="w-full rounded-md bg-indigo-500 px-3 py-4 text-white">Register</button>
+        </div>
+        <p class="text-center text-sm text-gray-500">Have account?
+          <a routerLink="/auth/login" class="text-semibold text-indigo-700">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
