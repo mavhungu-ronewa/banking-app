@@ -1,1 +1,36 @@
-<p>header works!</p>
+<header>
+  <nav class="sticky top-0 z-30 bg-gray-300 navbar transition-all transparent-nav text-white w-full dark:bg-gray-700">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between sm:justify-center header-height-80 h-16">
+        <svg class="flex sm:hidden cursor-pointer justify-start stroke-current text-white hover:text-sky-800 h-6 w-6"
+             (click)="showMobileMenu = !showMobileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <div class="flex items-center flex-wrap justify-between pl-3 sm:items-center sm:justify-between sm:w-full ">
+          <div class="flex-shrink-0 flex text-white items-center">
+            <span [routerLink]="'/'" class="text-white text-lg cursor-pointer">Ronewa.com</span>
+          </div>
+          <div class="hidden sm:block sm:ml-6">
+            <div class="flex space-x-4">
+              <a routerLink="/hotels" routerLinkActive="bg-nav-menu-active" class="hover:bg-sky-800 hover:text-white cursor-pointer text-white px-3 py-2 rounded-md text-sm font-medium">Hotels</a>
+              <a routerLink="/flights" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Flights</a>
+              <a routerLink="/rides" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cars</a>
+              <a routerLink="/auth/login" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Mobile Menu-->
+    <div class="sm:hidden" id="mobile-menu" *ngIf="showMobileMenu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a routerLink="/hotels" routerLinkActive="bg-nav-menu-active"  class="text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Hotels</a>
+        <a routerLink="/flights" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Flights</a>
+        <a routerLink="/rides" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cars</a>
+        <a routerLink="/auth/login" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
+      </div>
+    </div>
+  </nav>
+</header>
