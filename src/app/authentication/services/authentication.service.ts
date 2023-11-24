@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class AuthenticationService {
 
   private userIsLoggedIn: boolean = false;
-  constructor() { }
+  constructor(private httpService: HttpClient) { }
 
   checkLoginStatus(): boolean {
     return this.userIsLoggedIn;
