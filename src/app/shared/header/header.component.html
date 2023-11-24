@@ -15,7 +15,15 @@
               <a routerLink="/hotels" routerLinkActive="bg-nav-menu-active" class="hover:bg-sky-800 hover:text-white cursor-pointer text-white px-3 py-2 rounded-md text-sm font-medium">Hotels</a>
               <a routerLink="/flights" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Flights</a>
               <a routerLink="/rides" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cars</a>
-              <a routerLink="/auth/login" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+              <ng-container *ngIf="userIsLoggedIn; else loginLink">
+                <!-- User is logged in -->
+                <a (click)="logOut()" class="text-white hover:bg-sky-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Out</a>
+              </ng-container>
+              <ng-template #loginLink>
+                <!-- User is not logged in -->
+                <a (click)="checkOut()" class="text-white hover:bg-sky-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Check Out</a>
+                <a routerLink="/auth/login" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-sky-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -25,7 +33,6 @@
     <!--Mobile Menu-->
     <div class="sm:hidden" id="mobile-menu" *ngIf="showMobileMenu">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a routerLink="/hotels" routerLinkActive="bg-nav-menu-active"  class="text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Hotels</a>
         <a routerLink="/flights" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Flights</a>
         <a routerLink="/rides" routerLinkActive="bg-nav-menu-active" class="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cars</a>
