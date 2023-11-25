@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
-import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,10 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(private fb: FormBuilder, private route: Router) {}
+  loginError: string ='';
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private route: Router) {}
 
-    loginForm = this.fb.group({
+    loginForm = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
@@ -23,7 +25,18 @@ export class LoginComponent {
     if(this.loginForm.valid) {
       const loginData = this.loginForm.value;
       console.log('Logging in ...', loginData);
-      this.loginForm.reset();
+      this.authService.login(loginData)
+        .subscribe((success)=>{
+          if(success) {
+            this.loginForm.reset();
+          }
+          else {
+            this.loginError = '';
+          }
+        }, (error)=> {
+          this.loginError = ''
+        }
+        );
     }else {
       this.loginForm.markAllAsTouched();
     }
