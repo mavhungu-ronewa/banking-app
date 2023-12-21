@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-page-not-found',
@@ -9,5 +9,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './page-not-found.component.css'
 })
 export class PageNotFoundComponent {
+
+  constructor(private location: Location) {
+  }
+  goBack() {
+    this.location.back();
+  }
 
 }

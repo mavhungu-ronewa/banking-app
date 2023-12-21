@@ -1,1 +1,13 @@
-<p>home works this is home!</p>
+<div class="container mx-auto">
+  <div class='grid pb-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-[10px] gap-6'>
+    <div class="" *ngFor="let post of Products">
+      <div class='rounded overflow-hidden pb-4 mb-6 bg-white-500 shadow bordered' >
+        <img [src]="post.image" alt={{post.title}}  class='w-full'/>
+          <div class="mx-4">
+            <!--<p class="my-4 text-sm font-san font-normal">{{post.title}}</p>-->
+            <h5 class='mt-2 font-bold font-xl font-san text-blacks mb-5 capitalize'>{{post.title}}</h5>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

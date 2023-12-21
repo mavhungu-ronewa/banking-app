@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthenticationService } from "../../authentication/services/authentication.service";
+import { ModalService } from "../../authentication/services/modal.service";
 
 @Component({
   selector: 'app-header',
@@ -17,13 +18,32 @@ export class HeaderComponent implements OnInit {
   public navWidth: any;
   public navHeight: any;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private modalService:ModalService
+  ) {}
 
   ngOnInit(): void {
     /*this.navWidth = window.innerWidth;
     this.navHeight = window.innerHeight;*/
     this.checkLoginStatus();
   }
+  openLoginModal() {
+    this.modalService.openModal();
+  }
+  modalHandler(val: boolean) {
+    const modal: HTMLElement | null = document.getElementById("modal");
+    const button: HTMLElement | null = document.getElementById("button");
+    //var me : HTMLElement|null = document.getElementById("me");
+    if (val) {
+      modal?.classList.remove("hidden");
+      button?.classList.add("hidden");
+    } else {
+      modal?.classList.add("hidden");
+      button?.classList.remove("hidden");
+    }
+  }
+
 
   @HostListener('window:resize', ['$event']) onWindowResize() {
     this.navWidth = window.innerWidth;

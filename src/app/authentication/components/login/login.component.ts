@@ -14,7 +14,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 export class LoginComponent {
 
   loginError: string ='';
-  constructor(private fb: FormBuilder, private authService: AuthenticationService, private route: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) {}
 
     loginForm = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
@@ -29,6 +29,7 @@ export class LoginComponent {
         .subscribe((success)=>{
           if(success) {
             this.loginForm.reset();
+            this.router.navigate(['/home']);
           }
           else {
             this.loginError = '';
