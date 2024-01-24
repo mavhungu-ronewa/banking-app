@@ -21,7 +21,7 @@ export class LoginComponent {
       password: ['', [Validators.required]],
     });
 
-  onSubmit() {
+  onLogInSubmit() {
     if(this.loginForm.valid) {
       const loginData = this.loginForm.value;
       console.log('Logging in ...', loginData);

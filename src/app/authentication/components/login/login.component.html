@@ -1,7 +1,7 @@
 <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-6 sm:py-12">
   <div class="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
     <div class="w-full">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="group mt-6">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogInSubmit()" class="group mt-6">
         <div class="mb-6">
           <label for="email">Email</label>
           <input type="email" id="email" formControlName="email" class="w-full rounded-md border border-gray-300 px-3 py-2.5 placeholder-gray-300 shadow shadow-gray-100">
