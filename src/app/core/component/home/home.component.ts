@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   getProducts() {
     this.flights.getProducts().subscribe({
       next: (products)=> {
-        //console.log(products);
         this.Products = products;
       }
     })
