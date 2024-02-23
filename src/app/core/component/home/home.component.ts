@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from  "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { FlightService } from "../../../services/flight.service";
-import { getProducts, clearCart } from "../../../store/product.actions";
+import * as ProductActions from "../../../store/product.actions";
 import { Products } from "../../../modules/products";
+import { selectProducts } from "../../../store/product.selectors";
 
 @Component({
   selector: 'app-home',
@@ -19,28 +20,29 @@ export class HomeComponent implements OnInit {
 
   Flights : Products[] = [];
   Products: Products[] = [];
+  //products$: Observable<Products[]>;
   Hotels: string[] = [];
   Rides: string[] = [];
-  count$: Observable<number>
+  //count$: Observable<number>
   refresh: boolean = true;
   interval: any;
 
+  products$ = this.store.select(selectProducts);
   constructor(
-    private store: Store<{count: number}>,
-    private flights: FlightService
+    private store: Store,
+    private flights: FlightService,
+    private productService: FlightService
   ) {
-    this.count$ = store.select('count');
+    //this.count$ = store.select('count');
   }
+
   ngOnInit() {
+
+    this.store.dispatch(ProductActions.loadProducts());
     //this.getFlights();
-    this.getHotels();
-    this.getRides();
-    this.getProducts();
-    /*this.interval = setInterval(()=>{
-      if(this.refresh) {
-       this.getFlights();
-      }
-    },15000);*/
+/*    this.getHotels();
+    this.getRides();*/
+    //this.getProducts();
   }
 
   getFlights() {
@@ -58,16 +60,24 @@ export class HomeComponent implements OnInit {
     })
   }
   getProduct() {
-    this.store.dispatch(getProducts());
+    this.store.dispatch(ProductActions.getProducts());
   }
   reset() {
-    this.store.dispatch(clearCart());
+    this.store.dispatch(ProductActions.clearCart());
   }
   getHotels() {
     this.Hotels = [];
   }
   getRides() {
     this.Rides = [];
+  }
+  addProduct() {
+    const newProduct = { id: '1', name: 'New Product'}; /* add product using real data */
+    this.store.dispatch(ProductActions.addProduct({ product: newProduct }));
+  }
+  removeProduct() {
+    const productId = '1'; /* use real id from API */
+    this.store.dispatch(ProductActions.removeProduct({ productId }));
   }
 
 }
