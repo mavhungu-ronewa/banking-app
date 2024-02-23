@@ -1,9 +1,36 @@
 import { ActionReducer, createReducer, on } from "@ngrx/store";
-import { getProducts, getProductById, clearCart } from "./product.actions";
-export const initialState = 0;
+import * as ProductActions from "./product.actions";
+import { Products } from "../modules/products";
+
+export interface ProductState {
+  products: Products[];
+}
+
+export const initialProductState: ProductState = {
+  products: [],
+};
+
 export const productReducer = createReducer(
-  initialState,
-  on(getProducts, (state)=> state + 1),
-  on(getProductById, (state)=> state + 1),
-  on(clearCart, (state)=> 0)
+  initialProductState,
+
+  on(ProductActions.loadProductsSuccess, (state, { products }) => {
+    return {
+      ...state,
+      products: products,
+    };
+  }),
+
+  on(ProductActions.addProductSuccess, (state, { product }) => {
+    return {
+      ...state,
+      products: [...state.products, product],
+    };
+  }),
+
+  on(ProductActions.removeProductSuccess, (state, { productId }) => {
+    return {
+      ...state,
+      products: state.products.filter((product) => product.id !== productId),
+    };
+  })
 );
