@@ -6,8 +6,15 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { productReducer } from "./store/product.reducer";
+import { ProductEffects } from './store/product.effects';
+import { productReducer } from './store/product.reducer';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), provideStore({count: productReducer}), provideEffects()]
+  providers: [
+    provideRouter(routes),
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    provideStore({products: productReducer}),
+    provideEffects([ProductEffects]),
+  ]
 };
