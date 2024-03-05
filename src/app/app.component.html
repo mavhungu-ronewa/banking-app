@@ -1,4 +1,6 @@
 <app-login></app-login>
+<app-cart></app-cart>
+
 <div class="w-full h-full bg-gray-200">
   <div class="flex flex-no-wrap">
     <!-- Sidebar starts -->
@@ -199,12 +201,14 @@
           <div class="w-1/2 hidden lg:flex">
             <div class="w-full flex items-center pl-8 justify-end">
               <div class="h-full w-20 flex items-center justify-center border-r border-l mr-4">
-                <div class="relative cursor-pointer text-gray-600">
+                <div class="relative cursor-pointer text-gray-600" (click)="openCartModal()">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"></path>
                     <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
                     <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                   </svg>
+                  <span class="badge">{{ cartItemsCount }}</span>
+                  <!--<span class="badge">{{ (cartItems$ | async)?.length }}</span>-->
                   <div class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"></div>
                 </div>
               </div>

@@ -7,11 +7,15 @@ import { AsideComponent } from "./shared/aside/aside.component";
 import { ModalService } from "./authentication/services/modal.service";
 import { LoginComponent } from "./authentication/modal/login/login.component";
 import { RegistrationComponent } from "./authentication/modal/registration/registration.component";
+import { FlightService } from "./services/flight.service";
+import { CartService } from "./services/cart.service";
+import { CartComponent } from "./shared/modal/cart/cart.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, RegistrationComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -21,13 +25,23 @@ export class AppComponent implements OnInit {
   isMenu: boolean = false;
   isSearch: boolean = false;
   modalOpen: boolean =false;
+  cartItemsCount = 0;
 
-  constructor(private modalService:ModalService) {
+  constructor(
+    private modalService:ModalService,
+    private productService: FlightService,
+    private cartService: CartService
+  ) {
   }
 
+  products$ = this.productService.getProducts();
+  cartItems$ = this.cartService.getCartItems();
   ngOnInit() {
     this.modalService.getModalStatus().subscribe((status) => {
       this.modalOpen = status;
+    });
+    this.cartService.cartItems$.subscribe(items => {
+      this.cartItemsCount = items.reduce((acc, item) => acc + item.quantity, 0);
     });
   }
   openModal() {
@@ -51,5 +65,9 @@ export class AppComponent implements OnInit {
       modal?.classList.add("hidden");
       button?.classList.remove("hidden");
     }
+  }
+  /*Open Cart Modal*/
+  openCartModal() {
+    this.cartService.openCartModal();
   }
 }
