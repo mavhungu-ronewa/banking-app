@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<!--<div *ngIf="isModalOpen$ | async" class="modal">
+  <div class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out" (click)="closeModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" aria-label="Close" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </div>
+  <div class="modal-content">
+    <div *ngFor="let item of (cartItems$ | async)">
+      <img [src]="item.image" alt="{{ item.name }}">
+      <div>{{ item.name }}</div>
+      <div>{{ item.price }}</div>
+    </div>
+    <div>Total Price: {{ (totalPrice$ | async) | currency }}</div>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>-->
+
+
+
+  <div *ngIf="isModalOpen$ | async" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+    <div class="bg-white rounded-lg p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Cart</h2>
+        <button class="focus:outline-none" (click)="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 hover:text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-col space-y-4">
+
+        <div *ngFor="let item of cartItems" class="flex items-center space-x-4">
+          <img [src]="item.image" alt="{{item.title}}" class="w-12 h-20 rounded-lg">
+          <div class="flex flex-col">
+            <p class="text-lg font-semibold">{{item.title}}</p>
+            <p class="text-gray-600">Price: ${{item.price}}</p>
+            <div class="flex items-center space-x-2">
+              <button class="focus:outline-none" (click)="decreaseQuantity(item.id)">-</button>
+              <p>{{ item.quantity }}</p>
+              <button class="focus:outline-none" (click)="increaseQuantity(item.id)">+</button>
+            </div>
+            <button class="text-red-500" (click)="removeFromCart(item.id)">Remove</button>
+          </div>
+        </div>
+        <div>Total Price: {{ totalPrice | currency }}</div>
+      </div>
+    </div>
+  </div>
