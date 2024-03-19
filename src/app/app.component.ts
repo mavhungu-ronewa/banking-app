@@ -10,6 +10,7 @@ import { RegistrationComponent } from "./authentication/modal/registration/regis
 import { FlightService } from "./services/flight.service";
 import { CartService } from "./services/cart.service";
 import { CartComponent } from "./shared/modal/cart/cart.component";
+import {AuthenticationService} from "./authentication/services/authentication.service";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private modalService:ModalService,
+    private authService: AuthenticationService,
     private productService: FlightService,
     private cartService: CartService
   ) {
@@ -36,6 +38,9 @@ export class AppComponent implements OnInit {
 
   products$ = this.productService.getProducts();
   cartItems$ = this.cartService.getCartItems();
+  isLoggedIn$ = this.authService.isLoggedIn$;
+
+
   ngOnInit() {
     this.modalService.getModalStatus().subscribe((status) => {
       this.modalOpen = status;
@@ -46,12 +51,14 @@ export class AppComponent implements OnInit {
   }
   openModal() {
     this.modalService.toggleModal();
-    console.log("Opening modal");
     this.isMenu = false;
+  }
+
+  logout() {
+    this.authService.logout();
   }
   closeModal() {
     this.modalService.toggleModal();
-    console.log("closing modal");
   }
 
   modalHandler(val: boolean) {

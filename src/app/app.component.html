@@ -232,7 +232,7 @@
                         <span class="text-sm ml-2">My Profile</span>
                       </div>
                     </li>
-                    <li class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                   <!-- <li *ngIf="isLoggedIn; else loginTemplate" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
                       <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" />
@@ -242,6 +242,7 @@
                         <span class="text-sm ml-2">Sign out</span>
                       </div>
                     </li>
+                    <ng-template #loginTemplate>
                     <li class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="openModal()">
                       <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -250,6 +251,27 @@
                           <path d="M7 12h14l-3 -3m0 6l3 -3" />
                         </svg>
                         <span class="text-sm ml-2">Login</span>
+                      </div>
+                    </li>
+                    </ng-template>-->
+                    <li *ngIf="!(isLoggedIn$ | async)" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="closeModal()">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" />
+                          <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                          <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                        </svg>
+                        <span class="text-sm ml-2">LogIn</span>
+                      </div>
+                    </li>
+                    <li *ngIf="isLoggedIn$ | async" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="logout()">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" />
+                          <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                          <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                        </svg>
+                        <span class="text-sm ml-2">Logout</span>
                       </div>
                     </li>
                   </ul>
