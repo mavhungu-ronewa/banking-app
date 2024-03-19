@@ -6,9 +6,8 @@ import { RideBookingComponent } from "./core/component/ride-booking/ride-booking
 import { HomeComponent } from "./core/component/home/home.component";
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full'},
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'auth', loadChildren: ()=> import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
-  { path: 'home', component: HomeComponent },
   { path: 'flights', component: FlightBookingComponent },
   { path: 'hotels', component: HotelBookingComponent },
   { path: 'rides', component: RideBookingComponent },
