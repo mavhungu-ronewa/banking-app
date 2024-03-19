@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { ModalService } from "../../services/modal.service";
-import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AuthenticationService } from "../../services/authentication.service";
+import { Router, RouterLink } from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -25,26 +25,44 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginForm = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    email2: ['', [Validators.required]],
-    expiry: ['', [Validators.required]],
-    cvc: ['', Validators.required],
+    password: ['',Validators.required],
+    username: ['', [Validators.required]],
   });
   ngOnInit() {
     this.modalService.showModal$.subscribe((value)=> {
       this.showModal = value;
     });
+    this.authService.loginSuccess$.subscribe(()=>{
+      this.modalService.toggleModal();
+    })
   }
 
   onSubmit() {
     if(this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      console.log('Logging in ...', loginData);
-      this.authService.login(loginData)
-        .subscribe((success)=>{
+      this.authService.login(loginData);
+      this.loginForm.reset();
+        /*.subscribe({
+          next: (result)=>{
+            console.log(result);
+            this.loginForm.reset();
+            this.modalService.toggleModal();
+            this.authService.LoggedIn(true);
+            this.authService.userIsLoggedIn = true;
+            this.router.navigate(['/']);
+          },*/
+          /*error: (error: HttpErrorResponse)=>{
+            if(error instanceof ErrorEvent){
+              console.error('An error occurred', error.error.message);
+            }else {
+              console.error(`${error.status}, error message : ${error.message}`);
+            }
+          }*/
+       /* })*/
+        /*.subscribe((success)=>{
             if(success) {
               this.loginForm.reset();
-              //this.router.navigate(['/home']);
+              this.router.navigate(['/home']);
             }
             else {
               this.loginError = '';
@@ -52,7 +70,7 @@ export class LoginComponent implements OnInit {
           }, (error)=> {
             this.loginError = ''
           }
-        );
+        );*/
     }else {
       this.loginForm.markAllAsTouched();
     }
