@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.store.dispatch(ProductActions.loadProducts());
     //this.getFlights();
 /*    this.getHotels();
@@ -77,14 +76,6 @@ export class HomeComponent implements OnInit {
   addToCart(product: Products) {
     //this.store.dispatch(CartActions.addToCart({ product }));
     this.cartService.addToCart(product);
-  }
-  addProduct() {
-    const newProduct = { id: '1', name: 'New Product'}; /* add product using real data */
-    this.store.dispatch(ProductActions.addProduct({ product: newProduct }));
-  }
-  removeProduct() {
-    const productId = '1'; /* use real id from API */
-    this.store.dispatch(ProductActions.removeProduct({ productId }));
   }
 
 }
