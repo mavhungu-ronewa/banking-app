@@ -200,9 +200,6 @@
                       <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                     </svg>
                   </li>-->
-                  <!--<li class="w-full flex justify-center h-8" id="button">
-                    <button class="focus:outline-none mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" (click)="openModal()">Open Modal</button>
-                  </li>-->
                   <li *ngIf="!(isLoggedIn$ | async)" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="closeMobileModal()">
                     <div class="flex items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -357,7 +354,6 @@
         <div class="w-full h-full rounded">
           <!-- Content here -->
           <router-outlet></router-outlet>
-          <app-filters></app-filters>
         </div>
       </div>
     </div>

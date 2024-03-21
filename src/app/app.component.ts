@@ -11,13 +11,12 @@ import { FlightService } from "./services/flight.service";
 import { CartService } from "./services/cart.service";
 import { CartComponent } from "./shared/modal/cart/cart.component";
 import { AuthenticationService } from "./authentication/services/authentication.service";
-import { FiltersComponent } from "./core/component/filters/filters.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent, FiltersComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
