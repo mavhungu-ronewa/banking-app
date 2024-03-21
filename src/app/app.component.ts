@@ -10,13 +10,14 @@ import { RegistrationComponent } from "./authentication/modal/registration/regis
 import { FlightService } from "./services/flight.service";
 import { CartService } from "./services/cart.service";
 import { CartComponent } from "./shared/modal/cart/cart.component";
-import {AuthenticationService} from "./authentication/services/authentication.service";
+import { AuthenticationService } from "./authentication/services/authentication.service";
+import { FiltersComponent } from "./core/component/filters/filters.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent, FiltersComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   isSearch: boolean = false;
   modalOpen: boolean =false;
   cartItemsCount = 0;
+  categories: string[] = [];
 
   constructor(
     private modalService:ModalService,
@@ -48,19 +50,33 @@ export class AppComponent implements OnInit {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItemsCount = items.reduce((acc, item) => acc + item.quantity, 0);
     });
+    this.fetchAllCategories();
   }
   openModal() {
     this.modalService.toggleModal();
     this.isMenu = false;
   }
-
   logout() {
     this.authService.logout();
   }
   closeModal() {
     this.modalService.toggleModal();
   }
-
+  closeMobileModal() {
+    this.isMenu = false;
+    this.modalService.toggleModal();
+  }
+  fetchAllCategories(){
+    this.productService.getAllProductCategories()
+      .subscribe({
+        next: (response)=>{
+          this.categories = response;
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+  }
   modalHandler(val: boolean) {
     const modal: HTMLElement | null = document.getElementById("modal");
     const button: HTMLElement | null = document.getElementById("button");

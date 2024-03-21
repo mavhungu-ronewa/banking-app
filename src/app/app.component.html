@@ -14,7 +14,7 @@
         </svg>
       </div>
       <ul aria-orientation="vertical" class="py-6">
-        <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+        <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pb-4 pt-5 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
           <div class="flex items-center">
             <div>
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -58,6 +58,21 @@
             <span class="ml-2">Deliverables</span>
           </div>
         </li>
+        <div *ngFor="let category of categories">
+          <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+            <div class="flex items-center">
+              <div class="w-6 h-6 md:w-8 md:h-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <polyline points="7 8 3 12 7 16" />
+                  <polyline points="17 8 21 12 17 16" />
+                  <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>
+              </div>
+              <span class="ml-2 xl:text-base md:text-2xl text-base">{{ category }}</span>
+            </div>
+          </li>
+        </div>
       </ul>
     </div>
     <!--Mobile responsive sidebar-->
@@ -84,7 +99,7 @@
               </div>
             </div>
             <ul aria-orientation="vertical" class="py-6">
-              <li class="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+              <li class="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                 <div class="flex items-center">
                   <div class="w-6 h-6 md:w-8 md:h-8">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -134,6 +149,21 @@
                   <span class="ml-2 xl:text-base md:text-2xl text-base">Deliverables</span>
                 </div>
               </li>
+              <div *ngFor="let category of categories">
+                <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                  <div class="flex items-center">
+                    <div class="w-6 h-6 md:w-8 md:h-8">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <polyline points="7 8 3 12 7 16" />
+                        <polyline points="17 8 21 12 17 16" />
+                        <line x1="14" y1="4" x2="10" y2="20" />
+                      </svg>
+                    </div>
+                    <span class="ml-2 xl:text-base md:text-2xl text-base">{{ category }}</span>
+                  </div>
+                </li>
+              </div>
             </ul>
           </div>
           <div class="w-full">
@@ -170,8 +200,28 @@
                       <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                     </svg>
                   </li>-->
-                  <li class="w-full flex justify-center h-8" id="button">
+                  <!--<li class="w-full flex justify-center h-8" id="button">
                     <button class="focus:outline-none mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" (click)="openModal()">Open Modal</button>
+                  </li>-->
+                  <li *ngIf="!(isLoggedIn$ | async)" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="closeMobileModal()">
+                    <div class="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                        <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                      </svg>
+                      <span class="text-sm ml-2">LogIn</span>
+                    </div>
+                  </li>
+                  <li *ngIf="isLoggedIn$ | async" class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2" (click)="logout()">
+                    <div class="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                        <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                      </svg>
+                      <span class="text-sm ml-2">Logout</span>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -307,6 +357,7 @@
         <div class="w-full h-full rounded">
           <!-- Content here -->
           <router-outlet></router-outlet>
+          <app-filters></app-filters>
         </div>
       </div>
     </div>
