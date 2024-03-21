@@ -19,4 +19,10 @@ export class FlightService {
   getProducts(): Observable<any> {
     return this.http.get("https://fakestoreapi.com/products")
   }
+  getAllProductCategories(): Observable<any>{
+    return this.http.get("https://fakestoreapi.com/products/categories");
+  }
+  getProductsByCategory(category: string): Observable<any>{
+    return this.http.get(`https://fakestoreapi.com/products/category/${category}`);
+  }
 }
