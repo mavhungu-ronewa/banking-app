@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -24,20 +25,20 @@ export class LoginComponent {
   onLogInSubmit() {
     if(this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      console.log('Logging in ...', loginData);
-      this.authService.login(loginData)
-        .subscribe((success)=>{
-          if(success) {
-            this.loginForm.reset();
-            this.router.navigate(['/home']);
+      this.authService.login(loginData);
+        /*.subscribe({
+            next: (success) => {
+              if (success) {
+                this.loginForm.reset();
+                this.router.navigate(['/']);
+              } else {
+                this.loginError = '';
+              }
+            }, error: (error: HttpErrorResponse) => {
+              this.loginError = ''
+            }
           }
-          else {
-            this.loginError = '';
-          }
-        }, (error)=> {
-          this.loginError = ''
-        }
-        );
+        );*/
     }else {
       this.loginForm.markAllAsTouched();
     }
