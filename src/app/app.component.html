@@ -3,8 +3,8 @@
 
 <div class="w-full h-full bg-gray-200">
   <div class="flex flex-no-wrap">
-    <!-- Sidebar starts -->
-    <div style="min-height: 700px" class="absolute lg:relative w-64 {-- h-screen --} shadow bg-gray-100 hidden lg:block">
+    <!-- Sidebar starts style="min-height: 700px"-->
+    <div class="absolute lg:relative w-64 h-full {-- h-screen --} shadow bg-gray-100 hidden lg:block">
       <div class="h-16 w-full flex items-center px-8">
         <svg xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
           <path
@@ -176,7 +176,7 @@
                     <line x1="21" y1="21" x2="15" y2="15"></line>
                   </svg>
                 </div>
-                <input class="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-500 pl-10 py-2" type="text" placeholder="Search" />
+                <input class="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-500 pl-10 py-2" type="text" placeholder="Search here" />
               </div>
             </div>
             <div class="border-t border-gray-300">
@@ -248,14 +248,15 @@
           <div class="w-1/2 hidden lg:flex">
             <div class="w-full flex items-center pl-8 justify-end">
               <div class="h-full w-20 flex items-center justify-center border-r border-l mr-4">
-                <div class="relative cursor-pointer text-gray-600" (click)="openCartModal()">
+                <div class="relative py-1 cursor-pointer text-gray-600" (click)="openCartModal()">
+                  <div class="t-0 absolute left-[3]">
+                    <span class="flex h2 w-2 items-center justify-center rounded-full bg-red-500 text-xs text-white">{{cartItemsCount}}</span>
+                  </div>
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"></path>
                     <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
                     <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                   </svg>
-                  <span class="badge">{{ cartItemsCount }}</span>
-                  <!--<span class="badge">{{ (cartItems$ | async)?.length }}</span>-->
                   <div class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"></div>
                 </div>
               </div>
@@ -338,20 +339,32 @@
             </div>
           </div>
         </div>
-        <div class="text-gray-600 mr-8 visible lg:hidden relative" (click)="isMenu = true" id="menu">
-          <svg aria-label="Main Menu" aria-haspopup="true" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu cursor-pointer" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="4" y1="8" x2="20" y2="8" />
-            <line x1="4" y1="16" x2="20" y2="16" />
-          </svg>
+        <div class="flex space-x-2 text-gray-600 mr-8 visible lg:hidden relative" id="menu">
+          <div class="relative py-1" (click)="openCartModal()"><!-- Shopping cart items -->
+            <div class="t-0 absolute left-[2.5]">
+              <span class="flex h2 w-2 items-center justify-center rounded-full bg-red-500 text-xs text-white">{{cartItemsCount}}</span>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z"></path>
+              <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+              <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+            </svg>
+          </div>
+          <div (click)="isMenu = true">
+            <svg aria-label="Main Menu" aria-haspopup="true" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu cursor-pointer" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="4" y1="8" x2="20" y2="8" />
+              <line x1="4" y1="16" x2="20" y2="16" />
+            </svg>
+          </div>
         </div>
         <li class="w-full flex justify-center py-12 hidden" id="button">
           <button class="focus:outline-none mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" (click)="openModal()">Open Modal</button>
         </li>
       </nav>
       <!-- Navigation ends -->
-      <div class="container mx-auto h-full py-3 md:w-full w-full">
-        <div class="w-full h-full rounded">
+      <div class="container mx-auto h-full pt-2 md:w-full w-full">
+        <div class="w-full h-full rounded overflow-y-auto">
           <!-- Content here -->
           <router-outlet></router-outlet>
         </div>

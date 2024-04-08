@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { HeaderComponent } from "./shared/header/header.component";
 import { FooterComponent } from "./shared/footer/footer.component";
 import { AsideComponent } from "./shared/aside/aside.component";
@@ -11,12 +12,14 @@ import { FlightService } from "./services/flight.service";
 import { CartService } from "./services/cart.service";
 import { CartComponent } from "./shared/modal/cart/cart.component";
 import { AuthenticationService } from "./authentication/services/authentication.service";
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, FontAwesomeModule, HeaderComponent, FooterComponent, AsideComponent, LoginComponent, CartComponent, RegistrationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -28,6 +31,8 @@ export class AppComponent implements OnInit {
   modalOpen: boolean =false;
   cartItemsCount = 0;
   categories: string[] = [];
+  faCoffee = faCoffee;
+  faShoppingBag = faShoppingBag;
 
   constructor(
     private modalService:ModalService,
