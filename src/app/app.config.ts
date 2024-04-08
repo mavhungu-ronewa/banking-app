@@ -8,13 +8,14 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffects } from './store/product.effects';
 import { productReducer } from './store/product.reducer';
+import { categoryReducer } from './store/category.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideStore({products: productReducer}),
+    provideStore({ products: productReducer, category: categoryReducer }),
     provideEffects([ProductEffects]),
   ]
 };
