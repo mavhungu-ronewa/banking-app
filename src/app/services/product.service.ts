@@ -17,11 +17,9 @@ export class ProductService {
   getProducts(): Observable<any[]> {
     return this.products$;
   }
-
   openModal() {
     this.isModalOpenSubject.next(true);
   }
-
   closeModal() {
     this.isModalOpenSubject.next(false);
   }
