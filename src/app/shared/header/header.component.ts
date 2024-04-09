@@ -14,7 +14,7 @@ import { ModalService } from "../../authentication/services/modal.service";
 })
 export class HeaderComponent implements OnInit {
   showMobileMenu: boolean = false;
-  userIsLoggedIn: boolean = false;
+  //userIsLoggedIn: boolean = false;
   public navWidth: any;
   public navHeight: any;
 
@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
     private authService: AuthenticationService,
     private modalService:ModalService
   ) {}
+
+  userIsLoggedIn = this.authService.isLoggedIn$;
 
   ngOnInit(): void {
     /*this.navWidth = window.innerWidth;
