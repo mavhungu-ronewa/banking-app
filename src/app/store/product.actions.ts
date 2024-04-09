@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Products } from "../modules/products";
 
 export const getProducts = createAction('getProduct');
 export const getProductById = createAction('getProductById');
@@ -21,3 +22,7 @@ export const removeProductFailure = createAction('[Product] Remove Product Failu
 export const updateProduct = createAction('[Product] Update Product', props<{ product: any }>());
 export const updateProductSuccess = createAction('[Product] Update Product Success', props<{ product: any }>());
 export const updateProductFailure = createAction('[Product] Update Product Failure', props<{ error: any }>());
+
+export const filterProductsByCategory = createAction('[Product] Filter Products By Category', props<{ category: string }>());
+export const filterProductsByCategorySuccess = createAction('[Product] Filter Products By Category Success', props<{ products: Products[] }>());
+export const filterProductsByCategoryFailure = createAction('[Product] Filter Products By Category Failure', props<{ error: any }>());

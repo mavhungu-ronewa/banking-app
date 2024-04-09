@@ -2,8 +2,8 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
+import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { FlightService } from "../services/flight.service";
 import * as ProductActions from './product.actions';
 
@@ -21,4 +21,14 @@ export class ProductEffects {
   ));
 
   constructor(private actions$: Actions, private productService: FlightService) {}
+
+  filterProductsByCategory$ = createEffect(() => this.actions$.pipe(
+    ofType(ProductActions.filterProductsByCategory),
+    switchMap(({ category }) => {
+      return this.productService.getProductsByCategory(category).pipe(
+        map(products => ProductActions.filterProductsByCategorySuccess({ products })),
+        catchError(error => of(ProductActions.filterProductsByCategoryFailure({ error })))
+      );
+    })
+  ));
 }
